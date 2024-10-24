@@ -17,6 +17,7 @@ function loadView($name)
     }
 }
 
+
 function loadPartial($name)
 {
     $partialPath = basePath("views/partials/{$name}.php");
@@ -27,4 +28,21 @@ function loadPartial($name)
     } else {
         echo "Partial '{$name}' not found!";
     }
+}
+
+
+function inspect($value)
+{
+    echo '<pre>';
+    var_dump($value);
+    echo '</pre>';
+}
+
+
+function inspectAndDie($value)
+{
+    echo '<pre>';
+    var_dump($value);
+    echo '</pre>';
+    die();
 }

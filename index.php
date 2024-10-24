@@ -5,4 +5,6 @@ error_reporting(E_ALL);
 
 require './helpers.php';
 
-loadView('home');
+$uri = str_replace('/vacancy-hub', '', $_SERVER['REQUEST_URI']);
+
+require basePath('router.php');
