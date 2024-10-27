@@ -4,6 +4,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require './helpers.php';
+require basename('Database.php');
+$config = require basePath('config/db.php');
+
+$db = new Database($config);
 
 require basePath('Router.php');
 
