@@ -11,7 +11,7 @@ $router = new Router();
 
 $routes = require basePath('routes.php');
 
-$uri = str_replace('/vacancy-hub', '', $_SERVER['REQUEST_URI']);
+$uri = str_replace('/vacancy-hub', '', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 $method = $_SERVER['REQUEST_METHOD'];
 
 $router->route($uri, $method);
