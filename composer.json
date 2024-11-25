@@ -1,0 +1,16 @@
+{
+  "name": "bokhuuu/vacancy-hub",
+  "description": "Job listing app",
+  "authors": [
+    {
+      "name": "Zura Bokhua",
+      "email": "zurabokhua@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Framework\\": "Framework/",
+      "App\\": "App/"
+    }
+  }
+}
