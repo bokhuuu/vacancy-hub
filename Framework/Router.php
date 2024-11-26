@@ -40,18 +40,46 @@ class Router
         $this->registerRoute('DELETE', $uri, $controller);
     }
 
-    public function route($uri, $method)
+    public function route($uri)
     {
+
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
+
         foreach ($this->routes as $route) {
-            if ($route['uri'] === $uri && $route['method'] === $method) {
 
-                $controller = 'App\\Controllers\\' . $route['controller'];
-                $controllerMethod = $route['controllerMethod'];
+            $uriSegments = explode('/', trim($uri, '/'));
 
-                $controllerInstance = new $controller();
-                $controllerInstance->$controllerMethod();
+            $routeSegments = explode('/', trim($route['uri'], '/'));
 
-                return;
+            $match = true;
+
+            if (count($uriSegments) === count($routeSegments) && strtoupper(
+                $route['method'] === $requestMethod
+            )) {
+                $params = [];
+
+                $match = true;
+
+                for ($i = 0; $i < count($uriSegments); $i++) {
+                    if ($routeSegments[$i] !== $uriSegments[$i] && !preg_match('/\{(.+?)\}/', $routeSegments[$i])) {
+                        $match = false;
+                        break;
+                    }
+
+                    if (preg_match('/\{(.+?)\}/', $routeSegments[$i], $matches)) {
+                        $params[$matches[1]] = $uriSegments[$i];
+                    }
+                }
+
+                if ($match) {
+                    $controller = 'App\\Controllers\\' . $route['controller'];
+                    $controllerMethod = $route['controllerMethod'];
+
+                    $controllerInstance = new $controller();
+                    $controllerInstance->$controllerMethod($params);
+
+                    return;
+                }
             }
         }
 
