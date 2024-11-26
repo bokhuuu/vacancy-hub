@@ -1,6 +1,5 @@
 <?php loadPartial('head'); ?>
 <?php loadPartial('navbar'); ?>
-<?php loadPartial('showcase-search'); ?>
 <?php loadPartial('top-banner'); ?>
 
 <!-- Post a Job Form Box -->
@@ -11,7 +10,7 @@
         <div class="message bg-green-100 p-3 my-3">
           This is a success message.
         </div> -->
-        <form method="POST">
+        <form method="POST" action="/vacancy-hub/listings">
             <h2 class="text-2xl font-bold mb-6 text-center text-gray-500">
                 Job Info
             </h2>
