@@ -6,7 +6,7 @@
 <section class="container mx-auto p-4 mt-4">
     <div class="rounded-lg shadow-md bg-white p-3">
         <div class="flex justify-between items-center">
-            <a class="block p-4 text-blue-700" href="/listings">
+            <a class="block p-4 text-blue-700" href="/vacancy-hub/listings">
                 <i class="fa fa-arrow-alt-circle-left"></i>
                 Back To Listings
             </a>
@@ -31,9 +31,11 @@
                     <!-- <span
                         class="text-xs bg-blue-500 text-white rounded-full px-2 py-1 ml-2">Local</span> -->
                 </li>
-                <li class="mb-2">
-                    <strong>Tags:</strong> <?= $listing->tags ?>
-                </li>
+                <?php if (!empty($listing->tags)) : ?>
+                    <li class="mb-2">
+                        <strong>Tags:</strong> <?= $listing->tags ?>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
