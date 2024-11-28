@@ -103,7 +103,7 @@ class ListingController
             $values = [];
 
             foreach ($newListingData as $field => $value) {
-                if ($value === ' ') {
+                if (trim($value === '')) {
                     $newListingData[$field] = null;
                 }
 
@@ -118,5 +118,29 @@ class ListingController
 
             redirect('/vacancy-hub/listings');
         }
+    }
+
+    public function destroy($params)
+    {
+        $id = $params['id'];
+        // inspectAndDie($id);
+
+        $params = [
+            'id' => $id
+        ];
+
+        $listing = $this->db->query(
+            'SELECT * FROM listings WHERE id = :id',
+            $params
+        )->fetch();
+
+        if (!$listing) {
+            ErrorController::notFound('Listing not found');
+            return;
+        }
+
+        $this->db->query('DELETE FROM listings WHERE id= :id', $params);
+
+        redirect('/vacancy-hub/listings');
     }
 }
