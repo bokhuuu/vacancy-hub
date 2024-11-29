@@ -123,7 +123,6 @@ class ListingController
     public function destroy($params)
     {
         $id = $params['id'];
-        // inspectAndDie($id);
 
         $params = [
             'id' => $id
@@ -140,6 +139,9 @@ class ListingController
         }
 
         $this->db->query('DELETE FROM listings WHERE id= :id', $params);
+
+
+        $_SESSION['success_message'] = 'Listing deleted successfuly';
 
         redirect('/vacancy-hub/listings');
     }
