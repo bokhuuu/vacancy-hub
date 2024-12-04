@@ -118,6 +118,8 @@ class ListingController
 
             $this->db->query($query, $newListingData);
 
+            Session::setFlashMessage('success_message', 'Listing created successfully');
+
             redirect('/vacancy-hub/listings');
         }
     }
@@ -141,14 +143,14 @@ class ListingController
         }
 
         if (!Authorization::isOwner($listing->user_id)) {
-            $_SESSION['error_message'] = 'You are not authorized to delete this listing';
+            Session::setFlashMessage('error_message', 'You are not authorized to delete this listing');
             return redirect("/vacancy-hub/listings/{$listing->id}");
         }
 
         $this->db->query('DELETE FROM listings WHERE id= :id', $params);
 
 
-        $_SESSION['success_message'] = 'Listing deleted successfuly';
+        Session::setFlashMessage('success_message', 'Listing deleted successfuly');
 
         redirect('/vacancy-hub/listings');
     }
@@ -240,7 +242,7 @@ class ListingController
 
             $this->db->query($updateQuery, $updateValues);
 
-            $_SESSION['success_message'] = 'Listing Updated';
+            Session::setFlashMessage('success_message', 'Listing updated successfuly');
 
             redirect("/vacancy-hub/listings/$id");
         }
